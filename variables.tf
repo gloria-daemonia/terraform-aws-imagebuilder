@@ -53,7 +53,7 @@ variable "kms_key" {
   default     = null
 }
 
-variable "image_builder_template" {
+variable "image_builder_user_data" {
   description = "The template path with actions for ImageBuilder Component to perform on your image."
   type        = string
   default     = ""

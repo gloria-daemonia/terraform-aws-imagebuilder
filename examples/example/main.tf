@@ -68,7 +68,7 @@ module "imagebuilder_custom_image" {
   subnet_id                     = module.vpc.public_subnets[0]
   additional_security_group_ids = [aws_security_group.ingress_all.id]
   distibution_region            = local.region
-  image_builder_template        = file("./user_data/imagebuilder_user_data.yaml")
+  image_builder_user_data       = file("./user_data/imagebuilder_user_data.yaml")
   parent_image                  = data.aws_ami.amazon_linux_2_ami.id
   tags                          = local.tags
 }

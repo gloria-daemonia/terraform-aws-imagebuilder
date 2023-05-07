@@ -74,7 +74,7 @@ resource "aws_imagebuilder_component" "this" {
   description = "Component with instructions to install required software for ${var.name}"
   platform    = "Linux"
   version     = "1.0.0"
-  data        = var.image_builder_template
+  data        = var.image_builder_user_data
   tags = merge(
     { "Name" = "${var.name} Image Component" },
     var.tags
