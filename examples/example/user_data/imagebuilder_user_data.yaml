@@ -1,0 +1,22 @@
+schemaVersion: 1
+phases:
+- name: build
+  steps:
+  - name: Update
+    action: ExecuteBash
+    inputs:
+      commands:
+      - echo "Starting yum update/upgrade"
+      - sudo yum -y update
+      - sudo yum -y upgrade
+      - echo "Done yum update/ugrade"
+
+  - name: Install_Docker
+    action: ExecuteBash
+    inputs:
+      commands:
+      - echo 'Starting install docker'
+      - sudo yum -y install docker
+      - sudo systemctl enable --now docker
+      - sudo gpasswd -a ec2-user docker
+      - echo 'Done install docker'
