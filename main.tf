@@ -124,3 +124,17 @@ data "aws_ami" "this" {
     values = ["${local.ami_name_prefix}*"]
   }
 }
+
+resource "null_resource" "put_result_ami_to_ssm" {
+  count    = var.result_ami_ssm_name ? 1 : 0
+  triggers = { result_ami_changed = data.aws_ami.this.id }
+  provisioner "local-exec" {
+    interpreter = ["bash", "-c"]
+    command     = <<-EOF
+    aws --region=${var.region} ssm put-parameter \\
+      --name "${var.result_ami_ssm_name}" \\
+      --value "${data.aws_ami.this.id}" \\
+      --overwrite
+    EOF
+  }
+}

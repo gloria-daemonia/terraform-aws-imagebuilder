@@ -2,6 +2,13 @@ variable "name" {
   description = "Name of the image."
   type        = string
   default     = "Custom-AMI"
+  nullable    = false
+}
+
+variable "region" {
+  description = "The AWS region name. Example: eu-north-1."
+  type        = string
+  nullable    = false
 }
 
 variable "vpc_id" {
@@ -42,7 +49,7 @@ variable "key_pair_name" {
 }
 
 variable "distibution_region" {
-  description = "The AWS region in which AMI will be distributed."
+  description = "The AWS region in which AMI will be distributed. Example: eu-north-1."
   type        = string
   nullable    = false
 }
@@ -63,6 +70,12 @@ variable "parent_image" {
   description = "Base AMI id for ImageBuilder."
   type        = string
   nullable    = false
+}
+
+variable "result_ami_ssm_name" {
+  description = "The SSM parameter name to which put result AMI id. Will not update anything if null."
+  type        = string
+  default     = null
 }
 
 variable "tags" {
