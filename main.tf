@@ -126,8 +126,11 @@ data "aws_ami" "this" {
 }
 
 resource "null_resource" "put_result_ami_to_ssm" {
-  count    = var.result_ami_ssm_name == null ? 0 : 1
-  triggers = { result_ami_changed = data.aws_ami.this.id }
+  count = var.result_ami_ssm_name == null ? 0 : 1
+  triggers = {
+    result_ami_changed    = data.aws_ami.this.id
+    ssm_parameter_changed = var.result_ami_ssm_name
+  }
   provisioner "local-exec" {
     interpreter = ["bash", "-c"]
     command     = <<-EOF
