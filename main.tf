@@ -58,7 +58,7 @@ resource "aws_imagebuilder_distribution_configuration" "this" {
       description = "This is ${var.name} ami distribution configuration"
       kms_key_id  = var.kms_key
       ami_tags = merge(
-        { "Type" = "${var.name} AMI" },
+        { "Name" = "${var.name}-AMI" },
         var.tags
       )
     }
